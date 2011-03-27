@@ -11,7 +11,7 @@ Installation
 
 1 - Install the plugin.
 
-The easiest way to install `sfBetaInvite` is to use the symfony command line:
+The easiest way to install `sfBetaInvitePlugin` is to use the symfony command line:
 
     > php symfony plugin:install sfBetaInvitePlugin
 
