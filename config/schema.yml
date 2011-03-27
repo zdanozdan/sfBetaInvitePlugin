@@ -1,0 +1,11 @@
+propel: 
+  _attributes:      { package: plugins.sfBetaInvitePlugin.lib.model }
+  
+  sf_beta_invite:
+    _attributes:   { phpName: sfBetaInvite }
+    id:            ~
+    email:         { type: varchar, required: true, index: unique  }
+    name:          { type: varchar, required: false }
+    message:       { type: integer, required: false }
+    created_at:    ~
+    updated_at:    ~
