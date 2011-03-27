@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en" datatype="plaintext" date="2009-03-06T11:33:31Z">
+    <body>
+      <trans-unit id="1">
+        <source>I18N_INVITATION_SUCCESS</source>
+        <target>We have registered this email address, thanks ! We will inform you on the progress.</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>I18N_INVITATION_FAILED</source>
+        <target>Sorry, unable to send invitation, please try again later</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>I18N_INVITATION_SUBJECT</source>
+        <target>Launch info remainder</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
