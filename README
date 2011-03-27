@@ -1,0 +1,63 @@
+The `sfBetaInvite` is an :
+
+Prerequisites
+-------------
+
+sfPostMarkPlugin
+
+
+Installation
+------------
+
+1 - Install the plugin.
+
+The easiest way to install `sfBetaInvite` is to use the symfony command line:
+
+    > php symfony plugin:install sfBetaInvitePlugin
+
+However recommended method is to fork the latest package from my git hub [https://github.com/zdanozdan/sfPostMarkPlugin] as I put changes there and may not have time to build symfony package.
+
+With version 1.6.5 of git and later, you can use:
+
+     > git clone --recursive git@github.com:zdanozdan/sfPostMarkPlugin.git
+
+For older git versions, just use:
+
+    > git clone git@github.com:zdanozdan/sfPostMarkPlugin.git
+    > git submodule update --init
+Now navigate to lib/vendor and change submodule branch to master
+    > cd lib/vendor
+    > git checkout master
+
+2 - Register on postmarkapp, create server, get api key and signatures
+
+3 - Configure app.yml
+
+  >  sf_postmark_plugin:
+  >    key:                  API Key > should get it from postmark after registration
+  >    from:                 foo@bar.com > your regisered mail address
+  >    name:                 Foo Bar > your registered name
+
+Those 3 are required to put in user app.yml config. 
+
+4 - Clear the cache to enable the autoloading to find the new classes:
+
+> php symfony cc
+
+5 - Start sending emails
+
+>    sfPostMark::compose()
+>      ->addTo('address@example.com', 'Name')
+>      ->subject('Subject')
+>      ->messagePlain('Plaintext message')
+>      ->tag('Test tag')
+>      ->send();
+
+sfPostMark extending Mail_Postmark class which is official PHP class for Postmark (https://github.com/Znarkus/postmark-php) so all the code from Postmark documentation should be valid as well.
+
+6. sfMailer factory
+It is also possible to replace default symfony sfMailer based on Swift Mailer in factories.yml with sfPostMark, it would become default mailer for Symfony, however I had not tried that.
+
+TODO
+----
+* add some testing
