@@ -1,4 +1,4 @@
-The `sfBetaInvitePlugin` is an symfony plugin for easy create beta invitations. Users can register with email and when app is launched they may be invited by email.
+The `sfBetaInvitePlugin` is an symfony plugin for easy create beta invitations. Users can leave their email address and when app is launched they may be notified. This is easy solution for gathering users before app launch.
 
 Prerequisites
 -------------
@@ -32,8 +32,22 @@ However recommended method is to fork the latest package from my git hub [https:
 
 > php symfony cc
 
-5 - Start sending emails
+5 - New routes has been added
+
+Call this route to get invitation form:
+
+  >http://localhost/invite/when/lauched/inviteNew -> '@sf_beta_invite_plugin_invite_new'
+
+When params are correct (sfEmailValidator called) other route is called:
+
+  >http://localhost/invite/when/lauched/inviteCreate -> '@sf_beta_invite_plugin_invite_create'
+
+6. Customize
+
+Look at the templates, you can customize the way form is displayed by adding your own template.
 
 TODO
 ----
 * add some testing
+* add bulk email sending
+* admin panel
