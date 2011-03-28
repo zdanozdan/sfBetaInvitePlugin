@@ -3,6 +3,7 @@ The `sfBetaInvitePlugin` is an symfony plugin for easy create beta invitations. 
 Prerequisites
 -------------
 
+sfPropel15Plugin - easy replacement for propel 1.4 bundled with symfony. 
 sfPostMarkPlugin for sending confirmation and invitation emails. If this plugin is not installed mail is sent using sfMailer
 
 
@@ -30,9 +31,15 @@ However recommended method is to fork the latest package from my git hub [https:
 
 4 - Clear the cache to enable the autoloading to find the new classes:
 
-> php symfony cc
+  > php symfony cc
 
-5 - New routes has been added
+5 - Rebuild the model
+
+  >symfony propel:build --all-classes
+
+6 - Modify database schema or load diff if db already exists
+
+7 - New routes has been added
 
 Call this route to get invitation form:
 
@@ -42,9 +49,13 @@ When params are correct (sfEmailValidator called) other route is called:
 
   >http://localhost/invite/when/lauched/inviteCreate -> '@sf_beta_invite_plugin_invite_create'
 
-6. Customize
+6. Customize template.
 
-Look at the templates, you can customize the way form is displayed by adding your own template.
+By default plugin use inviteNew template. To override plugins in symfony create an module in your project. But if you only have to override the template you can use the template var in app.yml
+
+all:
+  sf_beta_invite:
+    partial:                 [module,partial]
 
 TODO
 ----
