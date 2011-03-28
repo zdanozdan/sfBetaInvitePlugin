@@ -7,15 +7,6 @@
  * @subpackage form
  * @author     ##AUTHOR_NAME##
  */
-class sfBetaInviteForm extends BasesfBetaInviteForm
+class sfBetaInviteForm extends PluginsfBetaInviteForm
 {
-  public function configure()
-  {
-    $this->validatorSchema['email'] = new sfValidatorAnd(array(
-							       new sfValidatorString(array('max_length' => 255)),
-							       new sfValidatorEmail(),
-							       ));
-    $this->useFields(array('name','email'));
-
-  }
 }
