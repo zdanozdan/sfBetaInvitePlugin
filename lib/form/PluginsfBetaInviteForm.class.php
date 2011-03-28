@@ -3,9 +3,9 @@
 /**
  * sfBetaInvite form.
  *
- * @package    ##PROJECT_NAME##
+ * @package    sfBetaInvitePlugin
  * @subpackage form
- * @author     ##AUTHOR_NAME##
+ * @author     tomasz@mikran.pl
  */
 class PluginsfBetaInviteForm extends BasesfBetaInviteForm
 {
