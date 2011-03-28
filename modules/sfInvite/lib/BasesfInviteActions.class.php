@@ -5,7 +5,7 @@
  * 
  * @package     sfBetaInvitePlugin
  * @subpackage  sfInvite
- * @author      Tomasz Zdanowski
+ * @author      Tomasz Zdanowski <tomasz@mikran.pl>
  * @version     SVN: $Id$
  */
 abstract class BasesfInviteActions extends sfActions
@@ -31,6 +31,7 @@ abstract class BasesfInviteActions extends sfActions
 					  array('email' => $invite->getEmail(),
 						'name'  => $invite->getNameOrEmail()));
 
+
 	    if(class_exists('sfPostMark') == false)
 	      {
 		throw new sfException('sfPostMarkPlugin is required for this plugin. Install plugin or overwrite this method and remove sfPostMark call');
@@ -54,7 +55,32 @@ abstract class BasesfInviteActions extends sfActions
 	    throw $e;
 	  }
 
+	$conf = sfConfig::get('app_sf_beta_invite_partial_success');
+
+	//template params is an array with module, action values
+	if( count($conf) == 2)
+	  {
+	    $p = sprintf('%s/%s', $conf[0], $conf[1]);
+	    return $this->renderPartial($p,array('form'=>$this->form));
+	  }
+
 	return $this->redirect('@homepage');
+      }
+   
+    $conf = sfConfig::get('app_sf_beta_invite_partial_error');
+
+    //template params is an array with module, action values
+    if( count($conf) == 2)
+      {
+	$p = sprintf('%s/%s', $conf[0], $conf[1]);
+	return $this->renderPartial($p,array('form'=>$this->form));
+      }
+
+    //template params is no well formed
+    else if( count($conf) != 0 )
+      {
+	$message = sprintf('sfBetaInvite template configuration param is a YAML array like [module,partial]');
+	throw new sfConfigurationException($message);
       }
 
     $this->setTemplate('inviteNew');
