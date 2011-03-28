@@ -14,6 +14,10 @@
         <source>I18N_INVITATION_SUBJECT</source>
         <target>Launch info remainder</target>
       </trans-unit>
+      <trans-unit id="4">
+        <source>I18N_EMAIL_INVALID</source>
+        <target>This email address is invalid</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
