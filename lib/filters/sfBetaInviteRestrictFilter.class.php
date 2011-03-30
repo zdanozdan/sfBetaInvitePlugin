@@ -24,12 +24,11 @@ class sfBetaInviteRestrictFilter extends sfFilter
     $route      = $routing->getCurrentRouteName();
 
     //var_dump($routing->getCurrentRouteName());
-    //die();
     //super admin is allowed to do stupid things
     if($user->isSuperAdmin() == false)
       {
 	$conf = sfConfig::get('app_sf_beta_invite_allowed');
-	if(!in_array($route,$conf))
+	if(is_array($conf) && !in_array($route,$conf))
 	  {
 	    $user->setFlash('error',$i18n->__('I18N_INVITATION_RESTRICTED'));
 	    
