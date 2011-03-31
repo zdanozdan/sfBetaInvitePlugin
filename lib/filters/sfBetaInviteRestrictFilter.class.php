@@ -37,7 +37,7 @@ class sfBetaInviteRestrictFilter extends sfFilter
 	    //
 	    if($request->isXmlHttpRequest())
 	      {
-		$xml_message = sprintf('<div class="error large">%s</div>',$i18n->__('I18N_INVITATION_RESTRICTED'));
+		$xml_message = sprintf('<div class="error bigger">%s</div>',$i18n->__('I18N_INVITATION_RESTRICTED'));
 		echo $xml_message;
 		throw new sfStopException();
 	      }
