@@ -1,10 +1,13 @@
-The `sfBetaInvitePlugin` is an symfony plugin for easy create beta invitations. Users can leave their email address and when app is launched they may be notified. This is easy solution for gathering users before app launch.
+Are You launching soon ! Do you need to engage with users and notify them when yours product is ready ? This plugin is for you !
+===
+The `sfBetaInvitePlugin` is an symfony plugin for easy create beta invitations. Users can leave their email address and when app is launched they may be notified. This is easy solution for gathering users before app launch. 
+----
 
 Prerequisites
 -------------
 
-sfPropel15Plugin - easy replacement for propel 1.4 bundled with symfony. 
-sfPostMarkPlugin for sending confirmation and invitation emails. If this plugin is not installed mail is sent using sfMailer
+sfPropel15Plugin - easy replacement for propel 1.4 bundled with symfony (probably not needed right now)
+sfPostMarkPlugin for sending confirmation and invitation emails. If this plugin is not installed mail may be sent using sfMailer
 
 
 Installation
@@ -18,44 +21,56 @@ The easiest way to install `sfBetaInvitePlugin` is to use the symfony command li
 
 However recommended method is to fork the latest package from my git hub [https://github.com/zdanozdan/sfBetaInvitePlugin] as I put changes there and may not have time to build symfony package.
 
-     > git clone  git@github.com:zdanozdan/sfBetaInvitePlugin.git
+    > git clone  git@github.com:zdanozdan/sfBetaInvitePlugin.git
 
-2 - Install and configure sfPostMarkPlugin using plugin:install or better clone from github. Skip this step when using sfSwiftMailer. Use instructions from [https://github.com/zdanozdan/sfPostMarkPlugin]
+2 - Install and configure sfPostMarkPlugin using plugin:install or better clone from github. Skip this step when using sfSwiftMailer (you need to extend some code to support sfSwiftMailer). Use instructions from [https://github.com/zdanozdan/sfPostMarkPlugin]
 
 3 - Register on postmarkapp, create server, get api key and signatures
 
-  >  sf_postmark_plugin:
-  >    key:                  API Key > should get it from postmark after registration
-  >    from:                 foo@bar.com > your regisered mail address
-  >    name:                 Foo Bar > your registered name
+    >  sf_postmark_plugin:
+      >    key:                  API Key > should get it from postmark after registration
+      >    from:                 foo@bar.com > your regisered mail address
+      >    name:                 Foo Bar > your registered name
 
 4 - Clear the cache to enable the autoloading to find the new classes:
 
-  > php symfony cc
+    > php symfony cc
 
 5 - Rebuild the model
 
-  >symfony propel:build --all-classes
+    >symfony propel:build --all-classes
 
 6 - Modify database schema or load diff if db already exists
 
-7 - New routes has been added
+7 - New routes have been added
 
 Call this route to get invitation form:
 
-  >http://localhost/invite/when/lauched/inviteNew -> '@sf_beta_invite_plugin_invite_new'
+    > http://localhost/invite/when/lauched/inviteNew -> '@sf_beta_invite_plugin_invite_new'
 
 When params are correct (sfEmailValidator called) other route is called:
 
-  >http://localhost/invite/when/lauched/inviteCreate -> '@sf_beta_invite_plugin_invite_create'
+    > http://localhost/invite/when/lauched/inviteCreate -> '@sf_beta_invite_plugin_invite_create'
 
 6. Customize template.
 
 By default plugin use inviteNew template. To override plugins in symfony create an module in your project. But if you only have to override the template you can use the template var in app.yml
 
-all:
-  sf_beta_invite:
-    partial:                 [module,partial]
+    all:
+      sf_beta_invite_partial:
+        success: [module, partial]
+        error:   [module, partial]
+
+7. Add Filter. You can also prevent some routes from being called. It this happens user are redirected to @homepage route and flash variable is set
+
+    all:
+     sf_beta_invite:
+       allowed: [homepage,sf_guard_signin,sf_guard_signout,sf_beta_invite_plugin_invite_create]
+
+In filters.yml add new filter
+
+    restrict:
+     class: sfBetaInviteRestrictFilter
 
 TODO
 ----
